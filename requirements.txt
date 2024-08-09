@@ -4,7 +4,7 @@ langchain_community
 pypdf
 pypdf2
 langchain-openai
-chromadb
+chromadb==0.5.3
 langchain-chroma
 langchain-groq
 streamlit 
