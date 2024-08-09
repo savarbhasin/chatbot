@@ -12,7 +12,7 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_groq import ChatGroq
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_chroma import Chroma
-from langchain_openai import OpenAIEmbeddings
+from langchain_openai import OpenAIEmbeddings, ChatOpenAI
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain.chains.retrieval import create_retrieval_chain
 from langchain_core.output_parsers import JsonOutputParser
@@ -24,14 +24,15 @@ os.environ['GROQ_API_KEY'] = os.getenv('GROQ_API_KEY')
 os.environ['OPENAI_API_KEY'] = os.getenv('OPENAI_API_KEY')
 
 model = ChatGroq(model="llama3-70b-8192")
+model = ChatOpenAI(model='gpt-4o-mini')
 
 prompt = ChatPromptTemplate.from_template("""
     You are an invoice reader AI.
     Your goal is to answer the questions based on the context provided.
     <pdfcontent>{context}</pdfcontent>   
     <question>{input}</question>
-    Only answer in json format with the required keys as mention in question and their values. If you think that this
-                                          is not an invoice then just return "error":this is not an invoice
+    Only answer in json format with the required keys as mention in question and their values. 
+    If you think that the context provied is not from an invoice then just return "error":this is not an invoice
 """)
 
 
@@ -88,3 +89,4 @@ if uploaded_file is not None:
    
 else:
     st.info("Please upload a PDF or image file to get started.")
+        
