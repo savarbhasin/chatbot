@@ -9,3 +9,4 @@ langchain_chroma
 langchain-groq
 streamlit 
 pillow 
+google-generativeai
