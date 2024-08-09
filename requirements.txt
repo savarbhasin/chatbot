@@ -10,3 +10,4 @@ langchain-groq
 streamlit 
 pillow 
 google-generativeai
+pysqlite3-binary
