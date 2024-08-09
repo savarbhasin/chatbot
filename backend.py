@@ -8,7 +8,6 @@ from PyPDF2 import PdfReader
 from dotenv import load_dotenv
 import google.generativeai as genai
 from PIL import Image
-from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_groq import ChatGroq
 from langchain_core.prompts import ChatPromptTemplate
@@ -31,7 +30,8 @@ prompt = ChatPromptTemplate.from_template("""
     Your goal is to answer the questions based on the context provided.
     <pdfcontent>{context}</pdfcontent>   
     <question>{input}</question>
-    Only answer in json format with the required keys as mention in question and their values.
+    Only answer in json format with the required keys as mention in question and their values. If you think that this
+                                          is not an invoice then just return "error":this is not an invoice
 """)
 
 
